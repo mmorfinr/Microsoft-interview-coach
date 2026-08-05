@@ -172,6 +172,7 @@
     <button class="tabbtn" data-tab="stories">Stories Bank</button>
     <button class="tabbtn" data-tab="gaps">Close the Gaps</button>
     <button class="tabbtn" data-tab="connect">Connect &amp; Close</button>
+    <button class="tabbtn" data-tab="scenarios">Reliability &amp; Scenarios</button>
     <button class="tabbtn" data-tab="practice">Daily Practice</button>
     <button class="tabbtn" data-tab="progress">Progress</button>
   </nav>
@@ -217,10 +218,33 @@
   <section id="bank">
     <div class="panel" style="padding-bottom:8px;">
       <span class="tag">Hiring-manager screen bank</span>
-      <h2>32 likely questions, with a tailored answer draft for each</h2>
-      <p>Built from real reported Microsoft TPM/PM hiring-manager screens, this specific JD, your own prior interview prep, and a Situational Judgment set — hypothetical scenarios built around this JD's actual pressure points (escalations, MCAPS vs. engineering tension, dependency risk) rather than past-experience stories. Treat these as first drafts to make your own, not scripts to memorize.</p>
+      <h2>56 likely questions, with a tailored answer draft for each</h2>
+      <p>Built from real reported Microsoft TPM/PM hiring-manager screens, this specific JD, your own prior interview prep, Situational Judgment, Program Lifecycle, Technical Systems Thinking, and now full Customer Engagement, Escalation, and Data/Metrics coverage. For the deeper reliability vocabulary, the escalation operating rhythm, and the 5 highest-probability mock case scenarios, see the new <strong>Reliability &amp; Scenarios</strong> tab.</p>
     </div>
     <div id="bankList"></div>
+  </section>
+
+  <!-- RELIABILITY & SCENARIOS -->
+  <section id="scenarios">
+    <div class="panel">
+      <span class="tag">Deeper technical/reliability layer</span>
+      <h2>The vocabulary, the playbook, and the 5 most likely case scenarios</h2>
+      <p>This CFx role is explicitly about resiliency, stability, scalability, elasticity, performance predictability, and supportability — that's SRE vocabulary, not generic program-management vocabulary. Know these cold, have the escalation rhythm memorized, and walk through the 5 scenarios below at least once out loud before your call.</p>
+    </div>
+    <div class="panel">
+      <h2>Reliability vocabulary — know these cold</h2>
+      <div id="glossaryList"></div>
+    </div>
+    <div class="panel">
+      <h2>Your escalation operating rhythm</h2>
+      <p>If asked "walk me through how you'd manage a high-severity escalation," this is the structure to speak from — it's also the story spine for any "critical incident" behavioral question.</p>
+      <div id="rhythmList"></div>
+    </div>
+    <div class="panel">
+      <h2>5 highest-probability mock scenarios</h2>
+      <p>These are the specific case types this role is most likely to test. Practice each one out loud, not just read it.</p>
+    </div>
+    <div id="mockScenariosList"></div>
   </section>
 
   <!-- CONNECT & CLOSE -->
@@ -337,6 +361,8 @@ Task: I had to get all of them moving on a shared timeline without positional au
 
 Action: I mapped each team's priorities and constraints individually first, then built a shared dependency plan that showed each group exactly how their piece unblocked (or blocked) the others — making the cost of delay visible rather than abstract. I ran a regular cross-team sync focused on decisions and risk, not status theater, and escalated only the genuinely blocking issues, which kept my credibility high when I did ask leadership to intervene.
 
+One thing I'm deliberate about: I pay attention to how each stakeholder actually responds to information — some people move fastest when they see what they'd gain, others move fastest when they see what they'd lose, and it's the same underlying facts framed differently. With one vendor lead who was risk-averse, "if we don't align this dependency now, we lose three weeks of runway before the next milestone" landed harder than any version of the upside. With a more opportunity-driven engineering lead, "if we align now, we're the team that unblocks the whole migration early" got faster buy-in than the same warning would have. I'm not changing the facts — I'm choosing which side of the same trade-off to lead with, based on how that person actually makes decisions.
+
 Result: We delivered the multi-vendor migration on plan and cut integration testing time by 25%, and several of those engineering leads asked to work with me again on the next initiative — which is the real signal that the influence-without-authority approach worked.`
   },
   {
@@ -399,7 +425,27 @@ From there I make the trade-offs explicit: what we're gaining, what we're giving
     q:"Tell me about a conflict with an engineering team, and how you resolved it.",
     answer:`I've seen this most when engineers are shared across programs and every ask is labeled urgent. The real issue usually isn't disagreement about priorities — it's the lack of a single source of truth, which leaves engineers arbitrating urgency themselves. So instead of pushing my priority harder, I changed how I engaged: I pulled every ask together, aligned with the other stakeholders offline, and came back with one sequenced plan that made the trade-offs explicit — what's first, what's waiting, and why.
 
-I also named their reality directly — that I knew everything was being called urgent, that wasn't fair to them, and making that call was my job, not something they should have to carry. That shifted the tone immediately. Trust built over time because they saw I was filtering noise and protecting their focus, not just adding to the pile — so when something genuinely was urgent, they believed it.`
+Before I even get to the plan, though, I start from empathy, genuinely, not as a tactic. I put myself in their position first — they're already stretched across other programs, other people are calling their own asks urgent too, and now I'm one more person showing up wanting time on their calendar. I open by naming that directly: I acknowledge how packed their schedule already is, and that I know I'm not the only person treating my thing as urgent this week. That's not flattery — it's just true, and saying it first changes the entire tone of the conversation before I've asked them for anything.
+
+Then I offer something concrete, not just sympathy: I tell them I'll do the filtering myself — that my job is to make sure what actually reaches them is genuinely worth their time, sequenced and justified, so they're not the ones having to guess what's real urgency versus noise. That's the part that compounds. The first time, it's just a good conversation. But the next time I show up, they already know who I am — someone who protects their time instead of adding to the pile — and that's what actually gets me listened to quickly on the next ask, instead of having to rebuild credibility from zero every time.
+
+Trust built over time because they saw I was filtering noise and protecting their focus, not just adding to the pile — so when something genuinely was urgent, they believed it.`
+  },
+  {
+    id:"teamconflict-priorities", cat:"Influence",
+    q:"Describe a disagreement between two technical teams. How did you resolve it?",
+    answer:`Most of the time when two teams look like they're in conflict, they're not actually disagreeing on facts — they just don't understand each other's priorities, and it reads as conflict because nobody's asked why the other side wants what they want. So my first move isn't to mediate a compromise, it's to go to each team separately and ask what they're actually trying to accomplish and why it matters to them, in their own words, before I try to find a solution.
+
+That question — "what are you trying to do, and why does it matter" — almost always surfaces something useful: often both teams are optimizing for something real, just at different altitudes (one team protecting a launch date, the other protecting platform stability for everyone after this launch). Once I can see both priorities clearly, I can usually find where they're not actually opposed — which is where something like a phased delivery or a scoped-down first release comes from: not a forced compromise, but a path that genuinely serves both priorities, just sequenced differently than either team proposed on their own.
+
+What I've found is that the "common ground" almost always exists — it's just invisible until someone takes the time to understand both sides deeply enough to see it, instead of jumping straight to splitting the difference.`
+  },
+  {
+    id:"peerconflict-respect", cat:"Influence",
+    q:"Tell me about a time a colleague didn't show you respect or was difficult to work with. How did you handle it?",
+    answer:`When I run into someone who's dismissive or short with me, my instinct isn't to push back harder in the moment — it's to look for something outside the work itself to connect on. I'll find a genuine common ground — something unrelated to the project, a shared interest, a similar background, even just asking about their week in a way that isn't transactional — and use that to open a different kind of conversation than the one we'd been having.
+
+It sounds small, but it changes the relationship in a real way. Once there's a human connection underneath the working relationship, the next work conversation starts from a completely different place — they know who I am beyond the ask I'm making, and that's usually what earns me their actual attention and patience the next time I need something from them. I've found this works better than confronting the disrespect directly, because it doesn't put anyone on the defensive — it just quietly changes the foundation the working relationship sits on.`
   },
   {
     id:"prioritization", cat:"Judgment",
@@ -485,42 +531,232 @@ We hit the date, the phased pieces landed cleanly within a few weeks after, and 
     q:"A top enterprise customer escalates a critical production issue at 2am, insisting it's an Azure platform bug — but your Azure Core engineering contact believes it's a misconfiguration on the customer's side. What do you do?",
     answer:`I wouldn't take either side's read as fact before I have data — I'd treat it as two hypotheses to test, not a dispute to referee. First move: get both parties looking at the same evidence in real time — logs, config state, timeline — rather than relaying claims back and forth secondhand, which is usually where these escalations get stuck.
 
-While that investigation runs, I'd keep the customer updated on cadence even with no new answer yet, because silence is what erodes trust in an escalation, not the ambiguity itself. I'd frame it honestly: "we're validating both possibilities in parallel, here's what we've ruled out so far." If it does turn out to be a customer-side config issue, I'd still own how that message lands — pointing a finger at 2am with no context damages the relationship even when you're technically right. If it's platform-side, I'd make sure the root cause becomes a tracked platform improvement, not just a closed ticket, so it doesn't resurface with the next customer.`
+While that investigation runs, I'd keep the customer updated on cadence even with no new answer yet, because silence is what erodes trust in an escalation, not the ambiguity itself. I'd frame it honestly: "we're validating both possibilities in parallel, here's what we've ruled out so far." If it does turn out to be a customer-side config issue, I'd still own how that message lands — pointing a finger at 2am with no context damages the relationship even when you're technically right. If it's platform-side, I'd make sure the root cause becomes a tracked platform improvement, not just a closed ticket, so it doesn't resurface with the next customer.
+
+I've run this exact playbook dozens of times managing escalations across multi-vendor carrier networks — Ericsson, Nokia, and partner-side engineering all pointing at each other during a live outage is a Tuesday in telecom infrastructure. The tooling and the logo change with Azure; the discipline of evidence-first, blame-later doesn't.`
   },
   {
     id:"sit-latebug", cat:"Situational Judgment",
     q:"You're two weeks from a major customer commitment date and your team discovers a critical platform issue that could affect production reliability. What do you do?",
     answer:`I'd get the real severity and blast radius nailed down within hours, not days — vague risk is what causes panic decisions. Once I know what's actually at stake, I'd bring the trade-off to stakeholders explicitly rather than deciding alone: ship on date with a mitigation in place, delay the date, or ship a reduced-scope version that avoids the risky path entirely.
 
-I'd rather be the person who surfaces a hard truth early than the one who protects a date until it's unfixable. If the honest answer is "we need two more weeks to do this safely," I'd say that directly and put the customer-communication plan on the table at the same time as the risk assessment — not after leadership has already reacted. Microsoft's Accountability standard is being transparent before being asked, and a date slip you flag on day one reads completely differently than one that surfaces on day thirteen.`
+I'd rather be the person who surfaces a hard truth early than the one who protects a date until it's unfixable. If the honest answer is "we need two more weeks to do this safely," I'd say that directly and put the customer-communication plan on the table at the same time as the risk assessment — not after leadership has already reacted. Microsoft's Accountability standard is being transparent before being asked, and a date slip you flag on day one reads completely differently than one that surfaces on day thirteen.
+
+This is precisely the call I made on the CNDP migration cutover — nationwide infrastructure deployment for a mission-critical carrier platform, where "ship anyway" wasn't a real option and neither was an open-ended delay. I made the trade-off explicit, protected the date with a phased approach, and that's the same instinct I'd bring to an Azure customer commitment.`
   },
   {
     id:"sit-keyengleaves", cat:"Situational Judgment",
     q:"A key Azure Core engineering owner you're depending on gets pulled onto an unrelated P0 issue mid-program. How do you handle it?",
     answer:`First, I'd separate the person from the knowledge — figure out what specifically only lived in their head versus what's actually documented and transferable, because that's usually where programs quietly stall. Then I'd go directly to their manager, not around them, and make the ask concrete: not "can you free them up," but "here's exactly what I need and for how long," which is a much easier yes.
 
-In parallel, I wouldn't just wait — I'd look for a way to keep the program moving on the pieces that don't depend on that specific person, and be upfront with my own stakeholders that a dependency shifted and what that does to the timeline, rather than quietly absorbing the risk and hoping it resolves itself.`
+In parallel, I wouldn't just wait — I'd look for a way to keep the program moving on the pieces that don't depend on that specific person, and be upfront with my own stakeholders that a dependency shifted and what that does to the timeline, rather than quietly absorbing the risk and hoping it resolves itself.
+
+I've managed exactly this dynamic running multi-vendor programs across Ericsson, Nokia, and Mavenir engineering teams that didn't report to me and had their own competing priorities pulling them away mid-program. The fix is never really about winning the resource back — it's about being specific enough in the ask, and honest enough about the resulting timeline impact, that reprioritizing you actually looks reasonable to the other side.`
   },
   {
     id:"sit-mcapspromise", cat:"Situational Judgment",
     q:"MCAPS wants to promise a customer a fix timeline that Azure Core engineering says isn't realistic. How do you navigate that?",
     answer:`I wouldn't let it become a standoff between two teams — I'd get in the middle deliberately, as the person who translates both sides accurately instead of just relaying the more convenient message to whoever's in front of me. With MCAPS, I'd understand what's actually driving the timeline — a contractual commitment, a renewal date, competitive pressure — because "no" without that context reads as engineering being unhelpful. With engineering, I'd push on whether "not realistic" means truly infeasible or just under-resourced, since those need very different responses.
 
-From there I'd bring back a real option, not a refusal: a phased delivery, a scoped-down first milestone that's genuinely achievable, or a clear "here's what it would take to hit that date." The version of this I'd avoid is any answer where I quietly let MCAPS commit to something engineering never agreed to — that's the pattern that turns into an escalation with my name on it.`
+From there I'd bring back a real option, not a refusal: a phased delivery, a scoped-down first milestone that's genuinely achievable, or a clear "here's what it would take to hit that date." The version of this I'd avoid is any answer where I quietly let MCAPS commit to something engineering never agreed to — that's the pattern that turns into an escalation with my name on it.
+
+I mediated this exact tension constantly as the primary technical contact between OEM partners and engineering — partners committing to launch dates before engineering had confirmed feasibility is a recurring failure mode in any commercial-to-engineering handoff, telecom or cloud. My onboarding governance work cut that exposure specifically, and the same discipline applies here: don't let a commercial promise outrun an engineering commitment.`
   },
   {
     id:"sit-vagueprogram", cat:"Situational Judgment",
     q:"You inherit a program with vague success criteria and stakeholders who don't agree on what 'done' looks like. What's your first move?",
     answer:`I wouldn't start executing until I understood why it's vague — usually it's because the disagreement was never surfaced, not because no one has an opinion. I'd talk to each stakeholder group separately first, ask what success looks like in their own words, and write down where their definitions actually conflict rather than assuming alignment that isn't there.
 
-Then I'd bring a proposed definition of success back to the group as a starting point to react to, not a blank page to fill in — it's much easier for people to correct a draft than to generate consensus from nothing. Once we have real agreement, I'd document it and treat any future scope conversation as a deviation from that baseline, which is what keeps "done" from quietly drifting as the program goes on.`
+Then I'd bring a proposed definition of success back to the group as a starting point to react to, not a blank page to fill in — it's much easier for people to correct a draft than to generate consensus from nothing. Once we have real agreement, I'd document it and treat any future scope conversation as a deviation from that baseline, which is what keeps "done" from quietly drifting as the program goes on.
+
+I built exactly this kind of governance from zero for T-Mobile's nationwide 5G and LTE modernization — hundreds of vendors, multiple orgs, and no standardized definition of success across the portfolio when I inherited it. Ambiguity at that scale isn't a minor inconvenience, it's where multi-million-dollar programs quietly drift for months before anyone notices — so I treat resolving it as day-one work, not a nice-to-have.`
   },
   {
     id:"sit-customerdispute", cat:"Situational Judgment",
     q:"A customer's engineering team insists a recurring issue is a platform bug, but your investigation shows the root cause is on their side. How do you handle that conversation?",
     answer:`I'd lead with the data, not the verdict. Rather than opening with "this is your issue," I'd walk them through exactly what we investigated and what we found, so they're arriving at the same conclusion alongside me instead of being told it. I'd also stay genuinely open that our investigation could be incomplete — inviting them to poke holes in it rather than defending it, which usually de-escalates faster than confidence does.
 
-If the data really does point to their side, I'd still look for something we can own — a platform improvement that would have caught this earlier, better documentation, a monitoring gap — because "it's not our bug" without something constructive attached reads as deflection, even when it's accurate.`
+If the data really does point to their side, I'd still look for something we can own — a platform improvement that would have caught this earlier, better documentation, a monitoring gap — because "it's not our bug" without something constructive attached reads as deflection, even when it's accurate.
+
+I had this exact conversation regularly as the primary technical contact for OEM partners — a partner insisting our platform caused an integration failure that our investigation traced back to their own configuration. Walking them through the evidence rather than just asserting the conclusion is what preserved the relationship and kept them looping me in early on future issues instead of escalating past me.`
+  },
+  {
+    id:"pm-launchendend", cat:"Program Lifecycle",
+    q:"Walk me through how you would launch a program end to end.",
+    answer:`I run it in five phases, and I'm deliberate about not skipping the first one under time pressure, since that's where most later slippage actually originates.
+
+Discovery & scoping: get to a written, agreed definition of success before touching a plan — what problem this solves, for whom, and what "done" looks like. This is where I'd interview stakeholders separately first, the same way I approach any program with unclear alignment.
+
+Planning: build the dependency map, not just the task list — what has to be true before what, where the real gating constraints are (engineering capacity, validation cycles, external commitments), and where risk actually concentrates rather than spreading it evenly across a generic timeline.
+
+Execution: run a regular cadence focused on decisions and blockers, not status theater, and escalate only genuinely blocking issues so escalations retain credibility when they happen.
+
+Launch: have a go/no-go checkpoint with explicit criteria decided in advance, not judgment-called in the moment under launch-day pressure — this is exactly what I built for the CNDP migration cutover.
+
+Post-launch: this is the phase most programs treat as optional and I don't — I track the metrics that defined success in phase one, and I feed what breaks or surprises us back into the next program's planning phase, which is the same loop this JD describes for customer feedback into Azure Core engineering.`
+  },
+  {
+    id:"pm-risksdeps", cat:"Program Lifecycle",
+    q:"How do you manage risks, dependencies, and timelines on a complex program?",
+    answer:`I treat these as one connected system, not three separate tracking exercises. I start by mapping dependencies explicitly — what blocks what, and which of those are hard gates versus soft preferences — because most timeline risk hides in dependencies nobody wrote down, not in the tasks everyone's already watching.
+
+For risk specifically, I keep a living risk register, not a point-in-time list: each risk has an owner, a trigger condition, and a mitigation, reviewed on a set cadence rather than only when something's already on fire. I prioritize risks by a combination of likelihood and blast radius — a low-probability risk that would stall three downstream teams gets more attention than a likely risk that's contained to one workstream.
+
+For timelines, I build in checkpoints tied to dependency resolution, not just calendar dates, so a slip shows up as "the upstream dependency didn't land," which is actionable, rather than just "we're behind," which isn't. This is the same governance pattern I built from the ground up for T-Mobile's 5G/LTE infrastructure programs — creating consistent reporting cadences and escalation paths across a portfolio with hundreds of vendors and no standardized process to start from.`
+  },
+  {
+    id:"pm-metrics", cat:"Program Lifecycle",
+    q:"How do you set metrics or OKRs for a program and track success?",
+    answer:`I anchor metrics to the outcome the program actually exists to drive, not to activity that's easy to measure. Before I'll agree a metric is right, I ask: if this number moves the "right" direction, does that actually mean the program succeeded, or could it move for the wrong reasons? That question kills a lot of vanity metrics early.
+
+In practice, I look for one or two leading indicators I can act on mid-program, not just a lagging outcome I only find out about at the end — for the CNDP migration, deployment velocity was trackable weekly, which let me course-correct long before the $2.2B annual savings number was even calculable. I also build the reporting so metrics are visible to stakeholders in something close to real time, through executive dashboards rather than a monthly readout, because a metric nobody sees until the retro isn't actually driving decisions, just documenting them after the fact.`
+  },
+  {
+    id:"tech-explainclearly", cat:"Technical Systems Thinking",
+    q:"Explain a technical concept clearly to someone non-technical.",
+    answer:`I'll use the one I actually had to explain to executive stakeholders during the CNDP migration: why we were moving partner connectivity services to a cloud-native architecture.
+
+"Today, if we need more capacity, it's like adding a room onto a house — slow, expensive, and it only helps that one house. Cloud-native is more like moving into an apartment building where you can add floors as needed and every unit shares the same plumbing and power — so scaling up is fast, and improvements to the building benefit every unit at once, not just one."
+
+That's the pattern I use generally: anchor on a physical analogy the listener already trusts, name the one trade-off that actually matters to their decision (in this case, migration risk versus long-term scalability), and stop there — I don't walk them through the mechanism, I walk them through the decision the mechanism enables. The goal is never to teach the technology; it's to make them comfortable making the call.`
+  },
+  {
+    id:"tech-designscalable", cat:"Technical Systems Thinking",
+    q:"Design a scalable system — walk me through your approach.",
+    answer:`I don't start with architecture, I start with the constraints that determine it — expected scale and growth rate, latency tolerance, consistency requirements, and failure tolerance. Those four answers eliminate most design options before I've drawn a single box.
+
+From there I think in layers: how does data get in (ingestion, load patterns), where does it live and how is it partitioned for the scale we expect, how do we serve reads versus writes if those patterns differ, and where are the single points of failure I need to design around. I'm explicit about trade-offs out loud — strong consistency costs latency, horizontal scale costs coordination complexity — because in program terms, every one of those trade-offs becomes a real engineering decision with a real timeline cost, and my job is making sure that trade-off gets made deliberately, not by default.
+
+I've applied this exact lens at national-carrier scale, not just in theory: the CNDP migration required taking deployment orchestration from 200 to 10,000+ deployments a month, which meant the orchestration layer itself had to become horizontally scalable and stateless — that's not a hypothetical system design exercise, that's a system I actually redesigned and shipped. Distributed systems at telecom scale — millions of subscribers, thousands of network elements, hard real-time constraints — carry the same scale and reliability pressure as any hyperscale cloud workload; the deployment target changes, the design discipline doesn't.`
+  },
+  {
+    id:"tech-tradeoffs", cat:"Technical Systems Thinking",
+    q:"Talk through architecture tradeoffs — scale, latency, reliability, cost, security.",
+    answer:`I think of these as a set of dials that all trade against each other, and my job as a TPM isn't to have the "right" answer technically — it's to make sure the trade-off being made matches the business priority, and that everyone in the room knows which dials we're turning.
+
+Scale vs. cost: horizontal scale is usually the safer long-term bet but costs more upfront in complexity and infrastructure spend — this is exactly the CNDP trade-off, where cloud-native cost more to build than patching the old model, but the $2.2B in savings only existed because we accepted that upfront cost.
+
+Latency vs. reliability: redundancy that protects reliability (multi-region, replication) often adds latency from coordination overhead — I saw this constantly in nationwide 5G/LTE rollouts, where redundant RAN and core network paths protect against failure but add real latency budget you have to design around, especially for latency-sensitive traffic.
+
+Security vs. velocity: tighter security gates slow releases; I've found the fix isn't loosening the gate, it's moving security earlier in the pipeline so it's not a late-stage blocker — same principle as catching a platform risk two weeks before a customer commitment date rather than the night before.
+
+In every case, my role is naming the trade-off explicitly to stakeholders rather than letting a default emerge silently, because the silent defaults are almost always the ones nobody actually agreed to. Network infrastructure and cloud infrastructure argue about the same four things — scale, latency, reliability, cost — the vocabulary changes, the physics of the trade-off doesn't.`
+  },
+  {
+    id:"ms-favoriteproduct", cat:"Microsoft & Product",
+    q:"What's your favorite Microsoft product, and how would you improve it?",
+    answer:`Microsoft Copilot — and it's not a talking-point answer, I actually use it in my current workflow to automate program status summarization, draft executive communications, and speed up Python-based reporting scripts, alongside GitHub Copilot and Claude. What I like about it is that it's genuinely embedded in the tools I already live in, rather than being a separate destination I have to remember to open.
+
+What I'd improve: for program management specifically, I'd want deeper context awareness across a program's actual artifacts — dependency maps, risk registers, prior status reports — so it can draft a status update that reflects real program state rather than a generic summary I still have to heavily edit. Right now it's excellent at language; the next unlock for someone in my role is trust in the underlying data it's reasoning over, which is really a governance and data-quality problem more than a language-model problem — which is exactly the kind of platform feedback loop this CFx role is built around.`
+  },
+  {
+    id:"cust-isolatedvplatform", cat:"Customer Engagement",
+    q:"How do you determine whether a customer issue is an isolated incident or a platform-level problem?",
+    answer:`I check for pattern before I check for cause. First move: pull other customers' support tickets and telemetry for the same symptom, not just this customer's data — a single strange event is often isolated, but the same symptom appearing across unrelated customers on the same underlying service is a platform signal even if each individual case looks minor.
+
+I also look at whether the issue correlates with something customer-specific (their configuration, their traffic pattern, their region) or something platform-specific (a recent deployment, a shared dependency, a capacity threshold). If it only reproduces under this customer's exact conditions, I treat it as isolated but still worth understanding fully. If I can't rule out platform-level exposure, I escalate it as platform-level by default — the cost of over-escalating a false positive is much lower than the cost of under-escalating a real platform risk that resurfaces with the next customer.`
+  },
+  {
+    id:"cust-investigatelatency", cat:"Customer Engagement",
+    q:"A strategic Azure customer reports unpredictable performance. How would you investigate?",
+    answer:`I'd start by making "unpredictable" precise — periodic, load-correlated, or genuinely random — since each points to a different investigation path. I'd pull p95/p99 latency rather than averages, since intermittent problems usually hide in the tail, and overlay that against saturation metrics (CPU, memory, queue depth) to see if it's a capacity story.
+
+In parallel, I'd loop in the customer's engineering team directly rather than working the problem in isolation — they often have context on when it started or what changed on their side that's faster than us reconstructing it purely from telemetry. I'd keep both "something changed on their end" and "something changed on our end" as live hypotheses until the data picks one, and communicate progress on a set cadence even before I have an answer.`
+  },
+  {
+    id:"cust-demandfix", cat:"Customer Engagement",
+    q:"How do you handle a customer who demands an immediate fix but engineering can't commit to one?",
+    answer:`I don't relay engineering's "can't commit" as a flat no — I go back and find out specifically why: is it genuinely infeasible on that timeline, or just not yet prioritized against other work. Those need very different customer conversations.
+
+With the customer, I lead with what I can commit to even when I can't commit to the fix itself — a clear investigation timeline, a mitigation or workaround if one exists, and a specific time I'll come back with more information. What erodes trust fastest isn't hearing "not yet" — it's silence or a vague promise that later slips. If the honest picture is that this genuinely won't move fast, I say that plainly rather than let the customer's expectation drift further from reality while I look for a better answer.`
+  },
+  {
+    id:"cust-onevmany", cat:"Customer Engagement",
+    q:"How do you balance one customer's urgent request against improvements that benefit many customers?",
+    answer:`I try not to treat it as a binary choice — I look for whether the urgent request and the broader improvement are actually the same underlying fix at different scope, which is more often true than people assume. If they're genuinely separate, I make the trade-off explicit to stakeholders rather than deciding quietly: what does the one customer lose if we prioritize the broader fix, and what do many customers lose if we prioritize the one.
+
+I also weight by more than urgency — a single customer's loud urgency isn't automatically higher-impact than a quieter systemic issue affecting dozens of accounts. I'll usually protect the platform-wide investment unless the single-customer issue carries real business risk (contract, renewal, safety) that changes the calculus — and either way, I say which lens I used, so the decision reads as deliberate rather than arbitrary.`
+  },
+  {
+    id:"esc-keepcustomerinformed", cat:"Escalation & Issue Management",
+    q:"How do you keep a customer informed when you don't yet know the answer?",
+    answer:`I commit to a cadence, not a content requirement — the update itself can honestly be "still isolating the cause, next update in two hours," and that's still valuable because it replaces anxious silence with a predictable rhythm they can plan around. What I avoid is guessing at a cause or a timeline just to have something reassuring to say — a wrong guess costs more trust than an honest "we don't know yet."
+
+I also tell them what we've ruled out, not just what we're still investigating — "it's not X or Y, we're now focused on Z" reads as real progress even without a resolution, and it shows the investigation is narrowing rather than stalled.`
+  },
+  {
+    id:"esc-execupdate", cat:"Escalation & Issue Management",
+    q:"What would you include in an executive status update during a major incident?",
+    answer:`Four things, in this order: current customer impact in plain terms (who's affected, how badly, right now — not projected), what we know about cause so far (with clear confidence level, not false certainty), what we're doing right now to mitigate, and when the next update is coming. I deliberately put impact first and technical detail last, because executives are deciding whether to escalate further or reassure their own stakeholders, and that decision depends on impact, not root-cause mechanics.
+
+I also flag explicitly if something needs an executive decision — resourcing, a customer communication approval, a trade-off only they can make — rather than burying an ask inside a status paragraph where it's easy to miss.`
+  },
+  {
+    id:"esc-badnews", cat:"Escalation & Issue Management",
+    q:"Tell me about a time you had to deliver bad news to a customer or senior leader.",
+    answer:`During an OEM partner integration, I had to tell a strategic partner that a launch date they'd already communicated internally wasn't going to hold — a dependency had slipped in a way that genuinely risked platform stability if we pushed through it.
+
+I didn't soften it into ambiguity. I told them directly what changed, why, and what the revised plan looked like, in that order — the why mattered because an unexplained slip reads as incompetence, while an explained one reads as a deliberate trade-off. I came with the recovery plan already in hand, not just the bad news alone, so the conversation had somewhere to go immediately rather than leaving them sitting with the problem.
+
+What I learned is that the delivery matters less than the sequencing — impact first, reason second, plan third — and that partners respected the direct version far more than they would have respected a delayed or softened one that just moved the hard conversation later.`
+  },
+  {
+    id:"esc-shareownership", cat:"Escalation & Issue Management",
+    q:"How do you establish ownership when several teams share responsibility for an issue?",
+    answer:`I separate incident ownership from root-cause ownership immediately, because trying to resolve both at once is usually what stalls a shared-responsibility issue. I'll name a temporary incident owner right away — often me, coordinating — purely to keep the investigation and mitigation moving, explicitly separate from who ends up owning the permanent fix.
+
+For the permanent fix, I push each team to answer the same falsifiable question: "if this isn't your system, what evidence would prove that?" That reframes ownership from an opinion-based debate into something the data actually settles, which is usually faster and less political than trying to negotiate ownership directly.`
+  },
+  {
+    id:"data-prioritize50", cat:"Data & Metrics",
+    q:"How would you prioritize 50 customer-reported platform issues?",
+    answer:`I wouldn't work them as 50 individual items — I'd cluster them first by root cause, since customer reports often duplicate the same underlying issue described differently, and that alone might collapse 50 tickets into a dozen real problems. Then I'd score each cluster on customer impact (how many accounts, how severe) against effort to fix, and separately flag anything that touches reliability or data integrity, which I'd treat as non-negotiable regardless of where it scores on the impact/effort grid.
+
+I'd also watch for issues that are individually small but represent a pattern trending upward — a low-severity issue tripling in frequency month over month is a different priority than a stable low-severity issue, even if today's snapshot looks the same. I'd bring the top-scored cluster back to stakeholders with the reasoning visible, not just a ranked list, so the prioritization is something they can push back on with real information.`
+  },
+  {
+    id:"data-correlationvroot", cat:"Data & Metrics",
+    q:"How do you distinguish correlation from root cause?",
+    answer:`I look for a mechanism, not just a timeline match. Two things happening around the same time is a hypothesis, not a conclusion — I want to be able to explain specifically how A causes B, not just that they moved together. Where possible, I test it: if I believe X caused the latency spike, can I reproduce or isolate X and watch the effect appear and disappear with it.
+
+I'm also cautious about the first correlation that "fits the story" people already believe, because that's the one most likely to get accepted without enough scrutiny. I'll deliberately look for a second explanation that fits the same data before I commit to the first one — if I can't find a plausible alternative, that's much stronger evidence than the correlation alone.`
+  },
+  {
+    id:"data-roi", cat:"Data & Metrics",
+    q:"How would you calculate the ROI of a reliability improvement?",
+    answer:`I frame the cost side and the value side separately, then compare. Cost is usually straightforward — engineering time, infrastructure spend, opportunity cost of what else that team could have built instead. Value is where I get specific rather than hand-wavy: reduced incident volume and severity translated into support-ticket cost avoided, engineering time not spent firefighting, and — the harder but most important number — reduced churn or renewal risk from the customers most exposed to the current instability.
+
+For something like the CNDP migration, the $2.2B in savings came from exactly this kind of calculation done rigorously up front, not estimated loosely after the fact — I'd apply the same discipline here: name the specific metric that will move, put a number on what moving it is worth, and revisit that number against actuals after the improvement ships so the ROI claim is something we can defend, not just something we projected.`
+  },
+  {
+    id:"beh-disagreecommit", cat:"Behavioral",
+    q:"Tell me about a time you disagreed with a decision but committed to it anyway.",
+    answer:`On an infrastructure modernization program, I pushed for a phased rollout because I believed the full-scope approach carried more risk than leadership was weighing. I made that case directly, with the risk data behind it — but leadership decided to go with the full-scope approach for competitive timing reasons that weighed factors beyond what I had visibility into.
+
+Once the decision was made, I didn't relitigate it or execute it half-heartedly — I put the same rigor into the full-scope plan that I would have put into my own preferred approach, because a decision executed reluctantly is often worse than either option done well. I did keep my original risk concerns visible in the plan as tracked items to watch, not as a way of saying "I told you so" later, but because disagreeing and committing doesn't mean pretending the risk I raised no longer exists.`
+  },
+  {
+    id:"beh-simplifyprocess", cat:"Behavioral",
+    q:"Tell me about a time you simplified a complex process.",
+    answer:`OEM partner onboarding at T-Mobile had grown a lot of process debt — every new integration added another checklist item or approval step, until the process itself became a bottleneck to the deployments it was supposed to protect. Rather than adding one more governance layer, I went through the existing process and asked, for each step, what specifically it was protecting against and whether it still applied given how the program had matured.
+
+I cut steps that were solving for risks we no longer had, consolidated approvals that different people were duplicating, and made the remaining steps clearer about why they mattered, not just that they were required. The simplified version reduced onboarding and deployment timelines by 30% — and just as importantly, it was easier for people to actually follow correctly, which is its own form of risk reduction.`
+  },
+  {
+    id:"tech-regionalfailure", cat:"Technical Systems Thinking",
+    q:"How would you design for regional failure — keeping a service available if an entire Azure region goes down?",
+    answer:`At the program level, this comes down to three decisions I'd want engineering to make deliberately rather than by default: what's the recovery objective (how much downtime and data loss is acceptable — RTO and RPO), is failover active-active or active-passive, and how is data replicated across regions and how consistent does it need to be in the failover moment.
+
+The trade-off I'd push teams to be explicit about is cost versus recovery speed — active-active with synchronous replication gives near-zero downtime but costs significantly more and adds latency from cross-region coordination, while active-passive is cheaper but means a slower, riskier failover and probably some data loss. My job as TPM isn't picking the engineering answer — it's making sure that trade-off gets decided against the actual business requirement (what does downtime cost this specific customer segment) rather than defaulting to whatever's easiest to build first.
+
+This maps almost one-to-one onto redundant network design in telecom infrastructure — geographic redundancy for core network elements, failover paths for RAN connectivity, the same RTO/RPO-style trade-offs just under carrier terminology. I managed exactly this discipline across nationwide LTE and 5G infrastructure, where "the network stays up if a site fails" is a non-negotiable requirement, not an aspiration — the same standard I'd bring to a mission-critical Azure workload.`
+  },
+  {
+    id:"tech-vmvcontainervserverless", cat:"Technical Systems Thinking",
+    q:"How would you evaluate whether a workload belongs on virtual machines, containers, or serverless infrastructure?",
+    answer:`I'd frame it around three questions: how variable is the load, how much operational control does the workload need, and how sensitive is it to cold-start latency. Steady, predictable, long-running workloads with specific OS or compliance requirements usually favor VMs — you're trading operational overhead for control. Workloads that need to scale up and down with traffic but still run continuously usually favor containers, which sit in a useful middle ground. Spiky, event-driven, or infrequent workloads usually favor serverless, since you're not paying for idle capacity — but cold-start latency can be a dealbreaker for anything latency-sensitive.
+
+In program terms, this isn't just a technical choice — it changes the cost model, the on-call burden, and how fast the team can iterate, so I'd want engineering's recommendation tied back to which of those the program actually optimizes for, not treated as a purely technical preference.`
   },
   {
     id:"reversequestions", cat:"Your questions for them",
@@ -739,6 +975,120 @@ function renderStories(){
       </details>
     </div>`;
   }).join('');
+}
+
+const GLOSSARY = [
+  {term:"SLI — Service Level Indicator", def:"The actual metric you measure, e.g. request latency, error rate, or availability percentage."},
+  {term:"SLO — Service Level Objective", def:"Your internal target for an SLI over time, e.g. \"99.9% of requests under 200ms.\" This is the number your team designs and operates against."},
+  {term:"SLA — Service Level Agreement", def:"An external, often contractual commitment to a customer — usually looser than your internal SLO, with financial or relationship consequences if missed."},
+  {term:"Error budget", def:"The amount of unreliability your SLO allows before you're out of budget. When it's spent, reliability work takes priority over new features — a genuinely useful prioritization lever to mention."},
+  {term:"MTTR — Mean Time To Recovery", def:"Average time from detection to resolution. The metric that matters most in an escalation conversation, more than root-cause depth."},
+  {term:"Change-failure rate", def:"% of deployments or changes that cause an incident. A rising rate is often the earliest signal of a systemic quality problem, before customers even notice."},
+  {term:"Latency percentiles (p50 / p95 / p99)", def:"p50 is the median experience; p99 is the worst-case tail. Averages hide the p99 — that's usually where the customers who escalate actually live."},
+  {term:"Saturation", def:"How \"full\" a resource is relative to capacity (CPU, memory, queue depth). Rising saturation with flat traffic is an early scalability bottleneck signal."},
+  {term:"Throughput", def:"Volume of work processed per unit time — requests/sec, transactions/sec. The number that answers \"how much can this actually handle.\""},
+  {term:"Availability vs. Durability", def:"Availability = is the system reachable right now. Durability = will the data still exist later. A system can be down (unavailable) without losing any data (still durable), and vice versa."},
+  {term:"Capacity headroom", def:"The buffer between current usage and max capacity before degradation starts. Thin headroom is what turns a normal traffic spike into an incident."},
+  {term:"Incident recurrence", def:"Whether the same root cause reappears after a fix — the single best signal of whether a fix was a real resolution or a patch that bought time."}
+];
+
+const RHYTHM = [
+  {step:"1. Establish severity & impact", detail:`Get precise fast: how many customers, what's actually broken, is data at risk. Severity determines everything downstream — cadence, who's in the room, and what "resolved" even means.`},
+  {step:"2. Identify owners", detail:"Name the accountable engineering owner explicitly, not \"the team is looking into it.\" Ambiguous ownership is what lets escalations drift."},
+  {step:"3. Create a single action log", detail:"One tracked list of actions and decisions, visible to everyone involved — this is what stops the same question getting asked in three different channels."},
+  {step:"4. Define communication cadence", detail:"Commit to update frequency up front, even if the update is \"no new information yet.\" Silence is what erodes trust in an escalation, not the ambiguity itself."},
+  {step:"5. Isolate the issue", detail:"Narrow from symptom to scope — what's actually affected versus what merely looks related. This is where I keep both hypotheses alive until the data picks one."},
+  {step:"6. Drive mitigation", detail:"Stop the bleeding before you fully understand the root cause if you can — a rollback or workaround that buys safety is often more valuable in the moment than the full fix."},
+  {step:"7. Confirm recovery", detail:"Recovery is confirmed by telemetry and the customer, not by engineering saying \"should be fixed.\" If internal signals and customer-reported state disagree, the escalation isn't closed."},
+  {step:"8. Track preventive action", detail:"The escalation isn't actually done when it's mitigated — it's done when the root cause becomes a tracked platform improvement, so the same issue doesn't resurface with the next customer."}
+];
+
+const MOCK_SCENARIOS = [
+  {
+    title:"Unpredictable latency on a mission-critical workload",
+    prompt:"A strategic customer reports unpredictable latency on a mission-critical Azure workload. Walk me through your investigation, escalation, communication, and long-term improvement plan.",
+    answer:`Investigation: I'd start by getting the shape of "unpredictable" precise — is it periodic, load-correlated, or truly random — because that alone narrows the hypothesis space fast. I'd pull p50/p95/p99 latency together, not just an average, since intermittent spikes usually hide in the p99 tail. I'd check saturation metrics (CPU, memory, queue depth) against the timing of the spikes to see if it's a capacity story or something else entirely — noisy neighbor, network path, downstream dependency.
+
+Escalation: severity gets set based on customer impact, not just technical severity — a mission-critical workload means this moves fast even before I know the cause. I'd name an owning engineering team immediately and open a single tracked action log.
+
+Communication: I'd tell the customer plainly what we know, what we don't, and when they'll hear from us next — even if the honest update is "still isolating, next update in two hours." I would not promise a root cause before I have one.
+
+Long-term: once mitigated, I'd push for this to become a platform-level investment, not a one-off fix — likely better observability into the specific dependency that caused it, since "unpredictable" issues are usually a symptom of a monitoring gap as much as a technical one.
+
+I've run this investigation pattern on live carrier networks under real customer pressure — intermittent latency across distributed RAN and core infrastructure is a constant in telecom, and the isolate-before-you-escalate discipline is identical regardless of whether the platform underneath is a cell network or Azure.`
+  },
+  {
+    title:"Three service teams disagree on ownership",
+    prompt:"Three Azure service teams disagree about who owns a recurring customer issue. How do you establish accountability and drive resolution?",
+    answer:`I wouldn't try to resolve the technical disagreement myself — I'd get all three teams looking at the same evidence in one room instead of relaying claims between them secondhand, which is usually why ownership disputes drag on. I'd ask each team the same question: "if this is not your system, what evidence would prove that?" — that reframes the conversation from opinion to falsifiable claims.
+
+If it genuinely spans all three, I wouldn't wait for a single owner to emerge naturally — I'd assign a temporary incident owner (often me, coordinating) purely to drive the investigation forward, separate from who ultimately owns the permanent fix. That unblocks momentum without pretending the ownership question is already settled.
+
+Once root cause lands with one team, I'd make sure that becomes explicit and documented — not just resolved quietly — so the same three teams don't repeat this exact disagreement the next time a similar issue surfaces.
+
+This is a direct match to the multi-vendor ownership disputes I mediated constantly across Ericsson, Nokia, and Mavenir engineering teams during network integration work — nobody wants to own a shared-responsibility issue by default, and the fix is always the same: make it about evidence, appoint a temporary coordinator, and don't let the ownership ambiguity itself become the blocker.`
+  },
+  {
+    title:"Customer wants a change that requires major engineering investment",
+    prompt:"A customer requests a platform change that would require significant engineering investment. How do you validate the problem, assess broader impact, and influence prioritization?",
+    answer:`First, I'd separate the request from the underlying problem — customers propose solutions, but the solution they ask for isn't always the best fix for what they actually need. I'd dig into what's driving the ask: is this papering over a workaround they've been living with, or a genuine platform gap.
+
+Then I'd check whether this is a one-customer problem or a pattern — pulling support tickets and other customer signals to see if this request is really a symptom of something broader, which is the difference between a customer favor and a platform investment case.
+
+To influence prioritization, I wouldn't just advocate — I'd build the business case the same way I would for any competing investment: quantified customer impact, how many other customers this likely affects, and the cost of not doing it (support burden, escalation risk, renewal risk) versus the engineering cost to build it. That's what turns "the customer wants this" into something Azure Core engineering can actually prioritize against everything else on their plate.
+
+This is exactly the case-building discipline behind the CNDP migration business case — quantifying customer and operational impact rigorously enough that a multi-million-dollar engineering investment became an obvious yes rather than a hard sell. The scale of the ask changes; the rigor required to earn engineering prioritization doesn't.`
+  },
+  {
+    title:"Program is six weeks behind due to a hidden dependency",
+    prompt:"A major program is six weeks behind schedule because of an undiscovered dependency. How do you recover the plan and communicate the impact?",
+    answer:`Recovery: I'd first confirm the dependency is real and fully scoped — undiscovered dependencies sometimes hide a second one behind them, so I'd rather find that out now than announce a new date and slip again. Then I'd look for what can move in parallel with the dependency resolving, rather than treating the whole program as blocked, and I'd challenge scope explicitly — is there a version of "done" that doesn't require this dependency at all for an initial milestone.
+
+Communication: I would not wait to have the full recovery plan before I flag the slip — I'd surface the six-week impact as soon as it's confirmed, with an honest range rather than a falsely precise new date, and follow up with the firmer plan once I have one. Microsoft's Accountability standard is being transparent before being asked, and a slip I surface immediately reads completely differently than one that surfaces after leadership finds out another way.
+
+I'd also use it as a process fix, not just a one-time recovery — asking why this dependency wasn't visible in the original plan, and tightening dependency-mapping for the next phase so it doesn't repeat.
+
+I've recovered programs from exactly this position — a hidden dependency surfacing mid-flight on a nationwide infrastructure program is not a hypothetical for me, it's happened, and the sequence that works is always the same: confirm scope fast, protect what can still move, and tell leadership the truth before they find out from someone else.`
+  },
+  {
+    title:"Customer says it's fixed, but telemetry still shows risk",
+    prompt:"The customer reports the issue is fixed, but internal telemetry still shows elevated risk. How do you determine whether to close the escalation?",
+    answer:`I wouldn't close it on either signal alone — a customer saying "looks fine" is often based on limited visibility into their own systems, and telemetry showing elevated risk without customer-visible symptoms could mean the underlying cause isn't actually resolved yet, just not triggering symptoms right now.
+
+I'd go back to what "resolved" was actually defined as when we opened the escalation — the specific metric or behavior we were chasing — and check that directly rather than relying on either party's general impression. If telemetry shows genuine elevated risk, I'd keep the escalation open but downgrade urgency and communicate clearly to the customer why: "your experience has improved, but we're still seeing an underlying signal we want fully resolved before we call this closed, here's what we're watching and for how long."
+
+Closing an escalation on a customer's subjective read alone, when your own data disagrees, is exactly the kind of thing that turns into a repeat escalation a few weeks later — and repeat escalations cost more trust than a slightly longer first one.
+
+I've held this exact line before under pressure to just close a ticket and move on — in telecom, "the customer says it's fine now" and "the network telemetry still shows drift" disagreeing with each other is common, and closing on the customer's word alone is how the same issue reopens a month later with less patience left on their side.`
+  }
+];
+
+function renderScenarios(){
+  document.getElementById('glossaryList').innerHTML = GLOSSARY.map(g=>`
+    <div style="padding:10px 0;border-bottom:1px solid var(--line);">
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:var(--blue);">${g.term}</div>
+      <div style="font-size:13.5px;color:#D3DBE8;margin-top:3px;line-height:1.55;">${g.def}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('rhythmList').innerHTML = RHYTHM.map(r=>`
+    <div style="padding:10px 0;border-bottom:1px solid var(--line);">
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;">${r.step}</div>
+      <div style="font-size:13.5px;color:#D3DBE8;margin-top:3px;line-height:1.55;">${r.detail}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('mockScenariosList').innerHTML = MOCK_SCENARIOS.map(m=>`
+    <div class="qcard">
+      <div class="cat">Mock case</div>
+      <div class="q">${m.title}</div>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 4px;font-style:italic;">"${m.prompt}"</p>
+      <details>
+        <summary>Show worked answer</summary>
+        <div class="answer">${m.answer}</div>
+      </details>
+    </div>
+  `).join('');
 }
 
 function renderGaps(){
@@ -979,6 +1329,7 @@ renderBank();
 renderStories();
 renderGaps();
 renderConnect();
+renderScenarios();
 renderDaily();
 updateHeaderStats();
 </script>
