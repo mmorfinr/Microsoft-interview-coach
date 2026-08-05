@@ -217,8 +217,8 @@
   <section id="bank">
     <div class="panel" style="padding-bottom:8px;">
       <span class="tag">Hiring-manager screen bank</span>
-      <h2>26 likely questions, with a tailored answer draft for each</h2>
-      <p>Built from real reported Microsoft TPM/PM hiring-manager screens, this specific JD, and the strongest patterns from your own prior interview prep — reworded for this role and this resume. Treat these as first drafts to make your own, not scripts to memorize.</p>
+      <h2>32 likely questions, with a tailored answer draft for each</h2>
+      <p>Built from real reported Microsoft TPM/PM hiring-manager screens, this specific JD, your own prior interview prep, and a Situational Judgment set — hypothetical scenarios built around this JD's actual pressure points (escalations, MCAPS vs. engineering tension, dependency risk) rather than past-experience stories. Treat these as first drafts to make your own, not scripts to memorize.</p>
     </div>
     <div id="bankList"></div>
   </section>
@@ -479,6 +479,48 @@ We hit the date, the phased pieces landed cleanly within a few weeks after, and 
     id:"trajectory", cat:"Motivation & Fit",
     q:"Where do you want to go from here? What does the next stage of your career look like?",
     answer:`I want to keep moving toward problems where the platform decisions I influence have outsized downstream impact — which is exactly why this role is appealing rather than incidental. Long term, I want to be the person organizations trust to sit at the hardest intersection in the room: where customer reality, engineering constraints, and business strategy all pull in different directions at once. That's been the throughline of my career already, from technology transformation programs early on to owning multi-billion-dollar infrastructure initiatives now, and I'm investing in the AI Engineering degree specifically because I think that intersection is about to get a lot more technically demanding. I'd rather grow into that from inside a platform like Azure than watch it from the outside.`
+  },
+  {
+    id:"sit-conflictingroot", cat:"Situational Judgment",
+    q:"A top enterprise customer escalates a critical production issue at 2am, insisting it's an Azure platform bug — but your Azure Core engineering contact believes it's a misconfiguration on the customer's side. What do you do?",
+    answer:`I wouldn't take either side's read as fact before I have data — I'd treat it as two hypotheses to test, not a dispute to referee. First move: get both parties looking at the same evidence in real time — logs, config state, timeline — rather than relaying claims back and forth secondhand, which is usually where these escalations get stuck.
+
+While that investigation runs, I'd keep the customer updated on cadence even with no new answer yet, because silence is what erodes trust in an escalation, not the ambiguity itself. I'd frame it honestly: "we're validating both possibilities in parallel, here's what we've ruled out so far." If it does turn out to be a customer-side config issue, I'd still own how that message lands — pointing a finger at 2am with no context damages the relationship even when you're technically right. If it's platform-side, I'd make sure the root cause becomes a tracked platform improvement, not just a closed ticket, so it doesn't resurface with the next customer.`
+  },
+  {
+    id:"sit-latebug", cat:"Situational Judgment",
+    q:"You're two weeks from a major customer commitment date and your team discovers a critical platform issue that could affect production reliability. What do you do?",
+    answer:`I'd get the real severity and blast radius nailed down within hours, not days — vague risk is what causes panic decisions. Once I know what's actually at stake, I'd bring the trade-off to stakeholders explicitly rather than deciding alone: ship on date with a mitigation in place, delay the date, or ship a reduced-scope version that avoids the risky path entirely.
+
+I'd rather be the person who surfaces a hard truth early than the one who protects a date until it's unfixable. If the honest answer is "we need two more weeks to do this safely," I'd say that directly and put the customer-communication plan on the table at the same time as the risk assessment — not after leadership has already reacted. Microsoft's Accountability standard is being transparent before being asked, and a date slip you flag on day one reads completely differently than one that surfaces on day thirteen.`
+  },
+  {
+    id:"sit-keyengleaves", cat:"Situational Judgment",
+    q:"A key Azure Core engineering owner you're depending on gets pulled onto an unrelated P0 issue mid-program. How do you handle it?",
+    answer:`First, I'd separate the person from the knowledge — figure out what specifically only lived in their head versus what's actually documented and transferable, because that's usually where programs quietly stall. Then I'd go directly to their manager, not around them, and make the ask concrete: not "can you free them up," but "here's exactly what I need and for how long," which is a much easier yes.
+
+In parallel, I wouldn't just wait — I'd look for a way to keep the program moving on the pieces that don't depend on that specific person, and be upfront with my own stakeholders that a dependency shifted and what that does to the timeline, rather than quietly absorbing the risk and hoping it resolves itself.`
+  },
+  {
+    id:"sit-mcapspromise", cat:"Situational Judgment",
+    q:"MCAPS wants to promise a customer a fix timeline that Azure Core engineering says isn't realistic. How do you navigate that?",
+    answer:`I wouldn't let it become a standoff between two teams — I'd get in the middle deliberately, as the person who translates both sides accurately instead of just relaying the more convenient message to whoever's in front of me. With MCAPS, I'd understand what's actually driving the timeline — a contractual commitment, a renewal date, competitive pressure — because "no" without that context reads as engineering being unhelpful. With engineering, I'd push on whether "not realistic" means truly infeasible or just under-resourced, since those need very different responses.
+
+From there I'd bring back a real option, not a refusal: a phased delivery, a scoped-down first milestone that's genuinely achievable, or a clear "here's what it would take to hit that date." The version of this I'd avoid is any answer where I quietly let MCAPS commit to something engineering never agreed to — that's the pattern that turns into an escalation with my name on it.`
+  },
+  {
+    id:"sit-vagueprogram", cat:"Situational Judgment",
+    q:"You inherit a program with vague success criteria and stakeholders who don't agree on what 'done' looks like. What's your first move?",
+    answer:`I wouldn't start executing until I understood why it's vague — usually it's because the disagreement was never surfaced, not because no one has an opinion. I'd talk to each stakeholder group separately first, ask what success looks like in their own words, and write down where their definitions actually conflict rather than assuming alignment that isn't there.
+
+Then I'd bring a proposed definition of success back to the group as a starting point to react to, not a blank page to fill in — it's much easier for people to correct a draft than to generate consensus from nothing. Once we have real agreement, I'd document it and treat any future scope conversation as a deviation from that baseline, which is what keeps "done" from quietly drifting as the program goes on.`
+  },
+  {
+    id:"sit-customerdispute", cat:"Situational Judgment",
+    q:"A customer's engineering team insists a recurring issue is a platform bug, but your investigation shows the root cause is on their side. How do you handle that conversation?",
+    answer:`I'd lead with the data, not the verdict. Rather than opening with "this is your issue," I'd walk them through exactly what we investigated and what we found, so they're arriving at the same conclusion alongside me instead of being told it. I'd also stay genuinely open that our investigation could be incomplete — inviting them to poke holes in it rather than defending it, which usually de-escalates faster than confidence does.
+
+If the data really does point to their side, I'd still look for something we can own — a platform improvement that would have caught this earlier, better documentation, a monitoring gap — because "it's not our bug" without something constructive attached reads as deflection, even when it's accurate.`
   },
   {
     id:"reversequestions", cat:"Your questions for them",
