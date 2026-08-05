@@ -169,6 +169,7 @@
   <nav>
     <button class="tabbtn active" data-tab="brief">Role Brief</button>
     <button class="tabbtn" data-tab="bank">Question Bank</button>
+    <button class="tabbtn" data-tab="stories">Stories Bank</button>
     <button class="tabbtn" data-tab="gaps">Close the Gaps</button>
     <button class="tabbtn" data-tab="connect">Connect &amp; Close</button>
     <button class="tabbtn" data-tab="practice">Daily Practice</button>
@@ -200,6 +201,16 @@
       <h3>Two things to shore up before the call</h3>
       <p>Your resume is telecom/T-Mobile-and-AT&amp;T-heavy; it doesn't say "Azure" or "cloud-native SaaS at hyperscaler" anywhere except CNDP. Be ready for "you haven't worked at a hyperscaler — how do you see your experience translating?" Have a 20-second bridge answer ready: distributed systems at national carrier scale, multi-vendor cloud-native platforms, and enterprise customer engineering are the transferable core — the domain changes, the operating pattern doesn't. Second: your MS in AI Engineering (WGU, expected Nov 2026) and Microsoft AI Product Manager certification are good signals of growth mindset — mention them briefly if asked about continued learning.</p>
     </div>
+  </section>
+
+  <!-- STORIES BANK -->
+  <section id="stories">
+    <div class="panel">
+      <span class="tag">Your prepared story bank</span>
+      <h2>10 flagship stories, mapped to Microsoft's competencies</h2>
+      <p>These are your own stories from earlier prep, kept intact — I tightened a few phrases and added the "ties to" line so you know exactly which Microsoft competency and which question type each one is your best answer for. Reuse the same story across multiple questions; that's normal and expected.</p>
+    </div>
+    <div id="storiesList"></div>
   </section>
 
   <!-- QUESTION BANK -->
@@ -241,9 +252,11 @@
       <textarea id="answerBox" placeholder="Type your answer here as if you're speaking it out loud. Aim for 90 seconds to 2 minutes when spoken — roughly 150-250 words."></textarea>
       <div class="btnrow">
         <button class="primary" id="feedbackBtn">Get coach feedback</button>
+        <button class="ghost" id="revealBtn">Show best answer</button>
         <button class="ghost" id="newQBtn">Give me a different question</button>
         <button class="ghost" id="saveBtn">Save without feedback</button>
       </div>
+      <div id="revealArea"></div>
       <div id="feedbackArea"></div>
     </div>
   </section>
@@ -340,20 +353,24 @@ Result: The resulting platform changes reduced repeat escalations and directly i
   {
     id:"comfortzone", cat:"Growth Mindset",
     q:"Tell me about a time you were outside your comfort zone — doesn't have to be work, could be life.",
-    answer:`This one is deliberately open-ended to see if you have a real answer loaded or only prepared work stories — the panic usually comes from searching too broadly in the moment, not from lacking a good story. Load one now, before the interview, so there's nothing to search for live.
+    answer:`In 2014, I moved from Mexico City to Redmond, Washington, for a new role at AT&T Mobility Labs. On paper it was a promotion. In reality, it meant starting over — new country, new team, a different corporate culture, and English as my working language full-time instead of part-time. I'd been senior and established where I was; here, I was the newest person in the room, and I had to earn credibility again from zero.
 
-Structure: what was comfortable before → what changed → what you actually felt, named plainly ("I didn't know if I'd be taken seriously," not "it was challenging") → what you did anyway → what it changed about how you operate now. That last part is what they're really listening for — this question is a proxy for growth mindset, not bravery.
+The hardest part wasn't the technical work — it was the small things. Reading the room in meetings, knowing when it was appropriate to push back versus listen, even just picking up on humor and tone. I remember sitting in early planning meetings unsure whether staying quiet made me look thoughtful or made me invisible.
 
-Strong candidates from your own background: moving from Mexico City to Redmond, WA for AT&T in 2014 (new country, new team, on top of a new job); going back for graduate degrees while working full-time and senior; or an early moment leading engineers before you felt you'd fully earned the authority. Pick the one with real texture and fill in the answer here once it's settled — don't leave this one blank the night before.
+What I did was simple but deliberate: I over-prepared. Before every meeting, I made sure I understood the technical material cold, so even if the social dynamics were unfamiliar, my judgment on the substance wasn't in question. I asked more questions one-on-one than I did in group settings, so I wasn't learning the culture in front of an audience. And I leaned on being genuinely curious about how things worked differently here, instead of defensive about how they'd worked back home.
 
-If you freeze mid-answer in the actual interview: it's fine to say "let me think of the right example for a second" out loud — a short pause reads as thoughtful, not weak. Silence panics people more than a stated pause does.`
+It took a few months, but I built the same kind of trust I'd had before — just on new ground. What changed permanently is how I now walk into any new team or environment: I assume competence will earn me the room eventually, and I stop needing to prove it on day one. That's actually the same instinct I'd bring into this role, stepping into Azure's customer and engineering ecosystem for the first time.`
   },
   {
     id:"failure", cat:"Accountability",
     q:"Tell me about a time a program you owned went off track. What did you do?",
-    answer:`Use a real, specific example here — this is the one question where a generic or safe-sounding answer reads worst to a Microsoft interviewer, because Accountability is explicitly about being transparent before being asked. Structure: (1) what went wrong and when you caught it, (2) how early and how directly you communicated it — ideally before anyone had to ask, (3) what you changed in the plan, (4) what you changed in how you run programs afterward so it's a genuine lesson, not just a story with a tidy ending. Avoid picking a "failure" that's actually a humblebrag (e.g., "I cared too much"). Pick something where the outcome genuinely required a scope cut, a hard conversation with a stakeholder, or a missed date — and show you owned it in the room, not just in hindsight.
+    answer:`Earlier in my career, leading technology transformation programs, I owned the design of technical configurations that field teams would install and validate on-site. I built the logic myself, wrote detailed instructions, and handed them off — my focus was on making sure the design was technically correct and the process was repeatable. From a pure engineering standpoint, it was solid work.
 
-Note: you already have a strong version of this from earlier prep — the early-career story about owning RAN configuration and scripts so tightly that field teams never built real ownership, which made you a bottleneck and slowed troubleshooting. That's a genuinely good Accountability story: it's specific, it's not a humblebrag, and the lesson ("success isn't just correctness, it's operability — I build systems and teams that work even when I'm not in the room") maps directly onto this role's emphasis on driving execution across teams you don't own. Reuse that story here — just land the close on Accountability/Judgment instead of product ownership, since that's what this interviewer is listening for.`
+But the program was more fragile than it should have been. Because I'd designed everything myself and field teams were just executing my instructions, they didn't have real ownership of the logic behind it. When something didn't behave as expected on-site, their instinct was to escalate back to me rather than troubleshoot it themselves — so testing cycles slowed down, and I became a bottleneck for a program that was supposed to scale without me in every loop.
+
+I caught it when the pattern of escalations started repeating across sites instead of decreasing as the team got more reps. I went to my lead directly rather than waiting for it to become visible some other way, laid out that the process worked but didn't scale, and proposed a fix: I rebuilt the handoff so field teams understood the why behind each configuration decision, not just the what, and I built in a troubleshooting guide so they could resolve common issues without me. It took an uncomfortable conversation admitting the original design was correct but incomplete.
+
+What changed permanently is how I define "done." A program isn't successful just because it works — it's successful when it works without me being the single point of failure. That's exactly the standard I'd hold myself to running cross-team programs here: designing execution plans and escalation processes that Azure Core and the customer teams can actually run, not ones that quietly depend on me being in every room.`
   },
   {
     id:"strengths", cat:"Self-Awareness",
@@ -512,6 +529,134 @@ function renderConnect(){
   `).join('');
 }
 
+const STORIES = [
+  {
+    theme:"Large-Scale Program Execution & Delivery",
+    title:"Scaling Deployments: $2.2B in Operational Savings",
+    bestFor:"\"Tell me about your biggest program impact\" / \"Describe a complex cross-functional program you led\"",
+    ties:"Drive for Results — the flagship number this whole interview should orbit around.",
+    situation:"T-Mobile had a nationwide modernization initiative operating at roughly 200 deployments per month — too slow to meet strategic targets and generating significant operational cost.",
+    task:"As Senior TPM over Enterprise Platform & Product Delivery, I was responsible for leading end-to-end execution of this initiative across Product, Engineering, Architecture, and Operations.",
+    action:"I drove roadmap execution, removed delivery blockers, managed critical dependencies across geographically distributed teams, and partnered with engineering organizations to improve release predictability and cross-team collaboration. I established governance frameworks and executive reporting that created visibility into program health and risk.",
+    result:"Accelerated deployment velocity from approximately 200 per month to more than 10,000 in a single month — a 50x increase — generating over $2.2 billion in operational savings."
+  },
+  {
+    theme:"Large-Scale Program Execution & Delivery",
+    title:"Multi-Billion-Dollar Infrastructure Program (AT&T)",
+    bestFor:"\"Tell me about managing a program with significant budget or scale\" / \"Experience with infrastructure modernization\"",
+    ties:"Drive for Results + Technical Credibility — shows you've operated at enterprise budget scale before, not just team scale.",
+    situation:"AT&T needed to modernize nationwide platform infrastructure across LTE, 5G, and cloud-native platforms — programs spanning multiple organizations, vendors, and hundreds of millions in investment.",
+    task:"As Senior TPM for Infrastructure Platforms & Modernization Strategy, I led enterprise-scale programs from planning through execution, including scheduling, risk management, and executive reporting.",
+    action:"I coordinated geographically distributed engineering teams across multiple organizations, developed governance processes and program metrics, and built executive scorecards that improved delivery predictability and supported decision-making at the highest levels.",
+    result:"Successfully delivered strategic technology initiatives with improved delivery consistency, operational performance, and executive visibility across multi-billion-dollar programs."
+  },
+  {
+    theme:"Large-Scale Program Execution & Delivery",
+    title:"Technology Transformation at Tier-1 Telecoms (Ericsson / Huawei / Aircom)",
+    bestFor:"\"Experience with international or global programs\" / \"Vendor or partner program management\"",
+    ties:"Customer Focus + Influence — global, multi-vendor coordination is close kin to CFx's MCAPS/Azure Core/customer triangle.",
+    situation:"Tier-1 telecommunications providers across Latin America needed to execute large-scale technology transformation programs on tight timelines with complex vendor and customer coordination.",
+    task:"As Senior TPM for Technology Transformation Programs, I led end-to-end delivery across multiple countries, managing planning, scheduling, budgeting, risk, vendor coordination, and executive reporting.",
+    action:"I directed geographically distributed engineering teams while coordinating across customers, vendors, and executive stakeholders throughout multi-year, complex implementation programs.",
+    result:"Successfully delivered large-scale transformation programs across multiple Latin American markets for some of the world's largest telecommunications providers over a six-year tenure spanning Ericsson, Huawei, and Aircom International."
+  },
+  {
+    theme:"Cross-Functional Leadership & Stakeholder Influence",
+    title:"Leading 6 TPMs Through Strategic Execution",
+    bestFor:"\"Tell me about your leadership style\" / \"Have you managed or mentored other TPMs?\"",
+    ties:"Inclusion + Accountability — proof you multiply other people's output, not just your own.",
+    situation:"T-Mobile's Enterprise Platform organization needed to scale TPM capacity to execute multiple simultaneous strategic initiatives across product, engineering, operations, and executive stakeholders.",
+    task:"In addition to owning my own programs, I was responsible for leading and mentoring a team of six Technical Program Managers across these initiatives.",
+    action:"I established shared governance practices, coached each TPM on dependency management, stakeholder communication, and executive reporting, and created alignment across the team on delivery standards and risk escalation frameworks.",
+    result:"Built a high-performing TPM function that executed across multiple simultaneous strategic programs — enabling faster delivery, stronger executive confidence, and consistent program health visibility."
+  },
+  {
+    theme:"Cross-Functional Leadership & Stakeholder Influence",
+    title:"Executive Dashboard & KPI Visibility (OEM / Connected Platforms)",
+    bestFor:"\"How do you communicate with executives?\" / \"Tell me about improving visibility or governance\"",
+    ties:"Communication & Collaboration — directly matches this JD's 'concise program updates on status, risks, and next steps' line.",
+    situation:"During the OEM Connected Platforms program at T-Mobile, executive stakeholders lacked real-time visibility into program health, customer readiness, and launch milestones across strategic partner integrations.",
+    task:"As Senior OEM Technical Account Manager & Program Lead, I needed to create a reporting structure that gave leadership the confidence to make decisions quickly without requiring deep technical context.",
+    action:"I designed and built executive dashboards and KPI reporting frameworks that surfaced delivery risks, dependency status, customer readiness, and launch milestone tracking in a single view accessible to senior leadership.",
+    result:"Increased leadership visibility into program health across all active OEM integrations, directly supporting faster executive decision-making and on-time commercial launch readiness."
+  },
+  {
+    theme:"Process Optimization & Governance",
+    title:"30% Reduction in Deployment Timelines",
+    bestFor:"\"Tell me about a process improvement you drove\" / \"How do you handle delivery inefficiencies?\"",
+    ties:"Drive for Results + Customer Focus — a concrete efficiency win tied directly to partner/customer satisfaction.",
+    situation:"At T-Mobile's Connected Platforms organization, OEM partner onboarding and product deployment timelines were inconsistent, creating risk to commercial launch commitments and partner relationships.",
+    task:"As Program Lead, I owned the governance, dependency management, and process design for OEM partner integrations across engineering, operations, business, and partner organizations.",
+    action:"I implemented governance enhancements, tightened dependency tracking, and optimized the process flow for onboarding and deployment — eliminating handoff delays and creating clearer accountability across teams.",
+    result:"Reduced onboarding and deployment timelines by 30%, improving partner satisfaction, launch predictability, and operational efficiency across the OEM portfolio."
+  },
+  {
+    theme:"Process Optimization & Governance",
+    title:"Governance Frameworks for 5G/LTE Infrastructure Programs",
+    bestFor:"\"How do you manage risk in a large program?\" / \"Tell me about building governance or a PMO from scratch\"",
+    ties:"Accountability + Judgment — you build the guardrails before you're asked to, which is exactly what Integrity & Accountability means at Microsoft.",
+    situation:"T-Mobile's nationwide 5G and LTE infrastructure modernization programs involved multi-billion-dollar investments, hundreds of vendors, and engineering teams spread across the country — with limited standardized governance.",
+    task:"As Senior Systems Architecture Lead for Network Infrastructure Program Management, I needed to establish program governance that could handle scale, complexity, and executive visibility requirements.",
+    action:"I developed governance frameworks, executive scorecards, and operational metrics from the ground up — creating consistent reporting cadences, risk escalation paths, and delivery checkpoints across the program portfolio.",
+    result:"Improved delivery predictability, enhanced executive visibility into program risk, and accelerated commercial launch readiness for nationwide LTE and 5G rollouts."
+  },
+  {
+    theme:"AI, Platform & Technology Delivery",
+    title:"Applying AI/Automation to Program Delivery",
+    bestFor:"\"How are you applying AI in your work?\" / \"What's your AI experience as a TPM?\"",
+    ties:"Technical Credibility + growth mindset — lead with Microsoft Copilot specifically here, it's their own product and the strongest signal in this whole bank.",
+    situation:"Program delivery at scale involves repetitive reporting, status aggregation, and risk monitoring tasks that consume significant TPM bandwidth that could be redirected to strategic work.",
+    task:"As a Senior TPM actively completing an M.S. in Software Engineering – AI Engineering, I began exploring how generative AI tools could improve program delivery operations.",
+    action:"I integrated tools including Microsoft Copilot, GitHub Copilot, and Claude into my workflow to automate program status summarization, draft executive communications, accelerate Python-based reporting scripts, and prototype AI-augmented governance dashboards.",
+    result:"Reduced time spent on recurring reporting tasks, improved consistency of executive communications, and built hands-on AI tooling literacy that I now apply directly to program design and delivery efficiency — including daily use of Microsoft's own Copilot stack, which I'd bring directly into how I run programs here."
+  },
+  {
+    theme:"AI, Platform & Technology Delivery",
+    title:"Platform Product Delivery: OEM Technical Account Management",
+    bestFor:"\"Experience at the intersection of product and engineering\" / \"Partner or platform integration programs\"",
+    ties:"Customer Technical Engagement — nearly a one-to-one match with this JD's core responsibility.",
+    situation:"T-Mobile's Connected Platforms organization needed a leader who could bridge engineering coordination, commercial launch readiness, and strategic OEM partner relationships simultaneously.",
+    task:"As Senior OEM Technical Account Manager & Program Lead, I served as the primary technical program lead for strategic OEM partners — accountable for engineering coordination, platform integration, and commercial launch.",
+    action:"I managed product onboarding initiatives involving engineering, operations, business stakeholders, and strategic partners — driving technical alignment, dependency resolution, and readiness verification end-to-end.",
+    result:"Successfully delivered partner platform integrations on time, with 30% faster deployment timelines and improved partner confidence in T-Mobile's platform delivery capabilities."
+  },
+  {
+    theme:"Ambiguity, Scale & Strategic Influence",
+    title:"Driving Strategy Into Execution Across Distributed Organizations",
+    bestFor:"\"Tell me about leading in an ambiguous environment\" / \"How do you align large organizations around a shared outcome?\"",
+    ties:"Influence without Authority — your strongest all-purpose closer if a question doesn't map cleanly elsewhere.",
+    situation:"Enterprise-scale programs at T-Mobile and AT&T routinely involved competing priorities, unclear ownership, and stakeholders spanning product, engineering, architecture, operations, legal, and executive leadership — with no single person able to mandate outcomes.",
+    task:"As Senior TPM, I was accountable for translating high-level business strategy into executable delivery plans — without direct authority over the teams required to deliver.",
+    action:"I built trust with engineering and product leaders through consistent technical credibility, created shared accountability through governance frameworks and transparent risk reporting, and used data-driven program scorecards to align executive stakeholders around priorities and trade-offs.",
+    result:"Consistently delivered complex, multi-organization programs on time — including a nationwide modernization that generated $2.2B in savings — by influencing without authority and creating clarity in ambiguous environments."
+  }
+];
+
+function renderStories(){
+  const list = document.getElementById('storiesList');
+  let lastTheme = '';
+  list.innerHTML = STORIES.map(s=>{
+    const themeHeader = s.theme !== lastTheme ? `<h3 style="margin-top:18px;">${s.theme}</h3>` : '';
+    lastTheme = s.theme;
+    return `${themeHeader}
+    <div class="qcard">
+      <div class="cat">Best for: ${s.bestFor}</div>
+      <div class="q">${s.title}</div>
+      <p style="font-size:12.5px;color:var(--amber);margin:0 0 10px;">Ties to: ${s.ties}</p>
+      <details>
+        <summary>Show full STAR story</summary>
+        <div class="answer"><strong>Situation:</strong> ${s.situation}
+
+<strong>Task:</strong> ${s.task}
+
+<strong>Action:</strong> ${s.action}
+
+<strong>Result:</strong> ${s.result}</div>
+      </details>
+    </div>`;
+  }).join('');
+}
+
 function renderGaps(){
   const list = document.getElementById('gapsList');
   list.innerHTML = GAPS.map(g=>`
@@ -592,6 +737,7 @@ function renderDaily(){
   document.getElementById('dailyCat').textContent = currentQ.cat;
   document.getElementById('answerBox').value = '';
   document.getElementById('feedbackArea').innerHTML = '';
+  document.getElementById('revealArea').innerHTML = '';
 }
 
 document.getElementById('newQBtn').addEventListener('click',()=>{
@@ -600,6 +746,13 @@ document.getElementById('newQBtn').addEventListener('click',()=>{
   document.getElementById('dailyCat').textContent = currentQ.cat;
   document.getElementById('answerBox').value = '';
   document.getElementById('feedbackArea').innerHTML = '';
+  document.getElementById('revealArea').innerHTML = '';
+});
+
+document.getElementById('revealBtn').addEventListener('click',()=>{
+  const area = document.getElementById('revealArea');
+  if(area.innerHTML){ area.innerHTML = ''; return; }
+  area.innerHTML = `<div class="feedback" style="border-left:3px solid var(--blue);">${currentQ.answer.replace(/</g,'&lt;')}</div>`;
 });
 
 async function logSession(feedbackText){
@@ -739,6 +892,7 @@ async function updateHeaderStats(){
 
 /* ---------------- Init ---------------- */
 renderBank();
+renderStories();
 renderGaps();
 renderConnect();
 renderDaily();
