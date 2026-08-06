@@ -271,14 +271,19 @@
   <section id="practice">
     <div class="panel">
       <span class="tag" id="dailyTag">Today's question</span>
+      <p class="sub" id="progressCounter" style="margin:0 0 4px;"></p>
       <h2 id="dailyQ">Loading…</h2>
       <p class="sub" id="dailyCat" style="margin-top:-6px;"></p>
       <textarea id="answerBox" placeholder="Type your answer here as if you're speaking it out loud. Aim for 90 seconds to 2 minutes when spoken — roughly 150-250 words."></textarea>
       <div class="btnrow">
         <button class="primary" id="feedbackBtn">Get coach feedback</button>
         <button class="ghost" id="revealBtn">Show best answer</button>
-        <button class="ghost" id="newQBtn">Give me a different question</button>
         <button class="ghost" id="saveBtn">Save without feedback</button>
+      </div>
+      <div class="btnrow" style="margin-top:6px;">
+        <button class="ghost" id="prevBtn">← Previous</button>
+        <button class="primary" id="nextBtn">Next question →</button>
+        <button class="ghost" id="shuffleBtn">🔀 Shuffle</button>
       </div>
       <div id="revealArea"></div>
       <div id="feedbackArea"></div>
@@ -1352,33 +1357,43 @@ function renderBank(){
 
 /* ---------------- Daily practice ---------------- */
 let currentQ = null;
+let currentIndex = 0;
 let sessionLog = {}; // date -> {questionId, answer, feedback}
 
 function pickQuestion(forceRandom){
   if(forceRandom){
     let idx;
     do { idx = Math.floor(Math.random()*QUESTIONS.length); } while(currentQ && QUESTIONS[idx].id===currentQ.id && QUESTIONS.length>1);
-    return QUESTIONS[idx];
+    return idx;
   }
-  return QUESTIONS[dailyIndex(todayStr())];
+  return dailyIndex(todayStr());
+}
+
+function showQuestionAt(idx){
+  currentIndex = ((idx % QUESTIONS.length) + QUESTIONS.length) % QUESTIONS.length;
+  currentQ = QUESTIONS[currentIndex];
+  document.getElementById('dailyQ').textContent = currentQ.q;
+  document.getElementById('dailyCat').textContent = currentQ.cat;
+  document.getElementById('progressCounter').textContent = `Question ${currentIndex+1} of ${QUESTIONS.length} — practice as many as you want today`;
+  document.getElementById('answerBox').value = '';
+  document.getElementById('feedbackArea').innerHTML = '';
+  document.getElementById('revealArea').innerHTML = '';
 }
 
 function renderDaily(){
-  currentQ = pickQuestion(false);
-  document.getElementById('dailyQ').textContent = currentQ.q;
-  document.getElementById('dailyCat').textContent = currentQ.cat;
-  document.getElementById('answerBox').value = '';
-  document.getElementById('feedbackArea').innerHTML = '';
-  document.getElementById('revealArea').innerHTML = '';
+  showQuestionAt(pickQuestion(false));
 }
 
-document.getElementById('newQBtn').addEventListener('click',()=>{
-  currentQ = pickQuestion(true);
-  document.getElementById('dailyQ').textContent = currentQ.q;
-  document.getElementById('dailyCat').textContent = currentQ.cat;
-  document.getElementById('answerBox').value = '';
-  document.getElementById('feedbackArea').innerHTML = '';
-  document.getElementById('revealArea').innerHTML = '';
+document.getElementById('nextBtn').addEventListener('click',()=>{
+  showQuestionAt(currentIndex + 1);
+});
+
+document.getElementById('prevBtn').addEventListener('click',()=>{
+  showQuestionAt(currentIndex - 1);
+});
+
+document.getElementById('shuffleBtn').addEventListener('click',()=>{
+  showQuestionAt(pickQuestion(true));
 });
 
 document.getElementById('revealBtn').addEventListener('click',()=>{
@@ -1390,12 +1405,14 @@ document.getElementById('revealBtn').addEventListener('click',()=>{
 async function logSession(feedbackText){
   const date = todayStr();
   const answer = document.getElementById('answerBox').value.trim();
-  const entry = { questionId: currentQ.id, question: currentQ.q, category: currentQ.cat, answer, feedback: feedbackText || null, ts: Date.now() };
-  await storageSet('practice:'+date, entry);
+  const sessionKey = date + ':' + Date.now();
+  const entry = { questionId: currentQ.id, question: currentQ.q, category: currentQ.cat, answer, feedback: feedbackText || null, ts: Date.now(), date };
+  await storageSet('practice:'+sessionKey, entry);
 
   const idxRaw = await storageGet('history-index');
   const idx = idxRaw || [];
-  if(!idx.includes(date)){ idx.push(date); await storageSet('history-index', idx); }
+  idx.push(sessionKey);
+  await storageSet('history-index', idx);
 
   await updateStreak(date);
   await updateHeaderStats();
@@ -1478,7 +1495,8 @@ async function renderProgress(){
     days.push(d.toISOString().slice(0,10));
   }
   const idx = (await storageGet('history-index')) || [];
-  streakLog.innerHTML = days.map(d=>`<div class="daybox ${idx.includes(d)?'done':''}" title="${d}"></div>`).join('');
+  const uniqueDates = new Set(idx.map(k=>k.split(':')[0]));
+  streakLog.innerHTML = days.map(d=>`<div class="daybox ${uniqueDates.has(d)?'done':''}" title="${d}"></div>`).join('');
 
   const historyList = document.getElementById('historyList');
   if(idx.length===0){
@@ -1486,10 +1504,10 @@ async function renderProgress(){
     return;
   }
   const sorted = [...idx].sort().reverse();
-  const entries = await Promise.all(sorted.map(d=>storageGet('practice:'+d)));
-  historyList.innerHTML = entries.filter(Boolean).map((e,i)=>`
+  const entries = await Promise.all(sorted.map(k=>storageGet('practice:'+k)));
+  historyList.innerHTML = entries.filter(Boolean).map((e)=>`
     <div class="histitem">
-      <div class="date">${sorted[i]} · ${e.category}</div>
+      <div class="date">${e.date} · ${e.category}</div>
       <div class="q">${e.question}</div>
       ${e.feedback ? `<details><summary style="cursor:pointer;color:var(--muted);font-size:12.5px;">View your answer & feedback</summary><div class="answer" style="margin-top:8px;">${e.answer}\n\n— Coach —\n${e.feedback}</div></details>` : `<div style="font-size:12.5px;color:var(--muted);">Saved, no feedback requested</div>`}
     </div>
@@ -1504,19 +1522,23 @@ async function updateHeaderStats(){
   document.getElementById('sessionVal').textContent = idx.length;
 
   const uniqueQIds = new Set();
-  for(const d of idx){
-    const e = await storageGet('practice:'+d);
-    if(e) uniqueQIds.add(e.questionId);
+  let todayCount = 0;
+  let todayHasFeedback = false;
+  const today = todayStr();
+  for(const key of idx){
+    const e = await storageGet('practice:'+key);
+    if(e){
+      uniqueQIds.add(e.questionId);
+      if(e.date === today){ todayCount++; if(e.feedback) todayHasFeedback = true; }
+    }
   }
   document.getElementById('coverageVal').textContent = uniqueQIds.size + ' / ' + QUESTIONS.length;
 
-  const today = todayStr();
-  const todayEntry = await storageGet('practice:'+today);
   const todayEl = document.getElementById('todayVal');
-  if(todayEntry && todayEntry.feedback){
-    todayEl.innerHTML = '<span class="dot green"></span>Practiced';
-  } else if(todayEntry){
-    todayEl.innerHTML = '<span class="dot amber"></span>Saved, no feedback yet';
+  if(todayCount > 0 && todayHasFeedback){
+    todayEl.innerHTML = `<span class="dot green"></span>${todayCount} practiced today`;
+  } else if(todayCount > 0){
+    todayEl.innerHTML = `<span class="dot amber"></span>${todayCount} saved today`;
   } else {
     todayEl.innerHTML = '<span class="dot grey"></span>Not started';
   }
